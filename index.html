@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>中国游泳 · 年龄段纪录与领军人物</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1 id="site-title">中国游泳 · 年龄段纪录与领军人物</h1>
+      <p id="site-subtitle" class="subtitle"></p>
+      <div class="meta-bar">
+        <span id="updated-badge" class="badge">数据更新中…</span>
+        <span id="refresh-note" class="refresh-note"></span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs wrap" id="tabs">
+    <button class="tab active" data-tab="youth">青少年年龄组纪录</button>
+    <button class="tab" data-tab="adult">成人年龄组纪录</button>
+    <button class="tab" data-tab="leaders">领军人物</button>
+    <button class="tab" data-tab="news">2026 突破动态</button>
+  </nav>
+
+  <main class="wrap">
+    <!-- 青少年年龄组 -->
+    <section id="panel-youth" class="panel active">
+      <div class="group-tabs" id="youth-group-tabs"></div>
+      <p class="source-note" id="youth-source"></p>
+      <div class="table-wrap">
+        <table class="rec-table">
+          <thead>
+            <tr><th>项目</th><th>女子</th><th>男子</th></tr>
+          </thead>
+          <tbody id="youth-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 成人年龄组 -->
+    <section id="panel-adult" class="panel">
+      <div class="group-tabs" id="adult-group-tabs"></div>
+      <p class="source-note" id="adult-source"></p>
+      <div class="table-wrap">
+        <table class="rec-table adult">
+          <thead>
+            <tr><th>项目</th><th>女子</th><th>男子</th></tr>
+          </thead>
+          <tbody id="adult-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 领军人物 -->
+    <section id="panel-leaders" class="panel">
+      <div class="leader-tier" id="tier-veterans">
+        <h2 class="tier-title">🏅 老将 · 精神压舱石</h2>
+        <div class="cards" id="cards-veterans"></div>
+      </div>
+      <div class="leader-tier" id="tier-midgen">
+        <h2 class="tier-title">🌊 中生代 · 中流砥柱</h2>
+        <div class="cards" id="cards-midgen"></div>
+      </div>
+      <div class="leader-tier" id="tier-rising">
+        <h2 class="tier-title">⭐ 新生代 · 破浪新星</h2>
+        <div class="cards" id="cards-rising"></div>
+      </div>
+    </section>
+
+    <!-- 突破动态 -->
+    <section id="panel-news" class="panel">
+      <ul class="timeline" id="timeline"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer wrap">
+    <h3>数据来源</h3>
+    <ul id="sources-list"></ul>
+    <p id="disclaimer" class="disclaimer"></p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
