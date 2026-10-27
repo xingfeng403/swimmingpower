@@ -51,6 +51,13 @@
 
   // Tabs
   var tabs = document.querySelectorAll(".tab");
+  // 标签页名称由数据驱动，改名只需改 data.js 的 meta.tabTitles
+  if (DATA.meta && DATA.meta.tabTitles) {
+    tabs.forEach(function (t) {
+      var key = t.getAttribute("data-tab");
+      if (DATA.meta.tabTitles[key]) t.textContent = DATA.meta.tabTitles[key];
+    });
+  }
   tabs.forEach(function (t) {
     t.addEventListener("click", function () {
       tabs.forEach(function (x) { x.classList.remove("active"); });
@@ -68,7 +75,13 @@
   function renderYouth() {
     var g = DATA.ageGroups[currentYouth];
     if (!g) return;
-    el("youth-source").textContent = "来源：" + (g.source || "");
+    var parts = [];
+    if (g.event) parts.push("赛事：" + g.event);
+    if (g.pool) parts.push("池长：" + g.pool + "米（" + (g.pool === 50 ? "长池" : "短池") + "）");
+    if (g.recordType) parts.push("记录性质：" + g.recordType);
+    if (g.refreshedAt) parts.push("最近刷新：" + g.refreshedAt);
+    if (g.source) parts.push("来源：" + g.source);
+    el("youth-source").textContent = parts.join("　·　");
     var body = el("youth-table-body");
     body.innerHTML = g.events.map(function (e) {
       return "<tr><td>" + escapeHtml(e.name) + "</td><td>" +
