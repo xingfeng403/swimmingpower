@@ -76,6 +76,7 @@
     var g = DATA.ageGroups[currentYouth];
     if (!g) return;
     var parts = [];
+    if (g.season) parts.push("赛季：" + g.season);
     if (g.event) parts.push("赛事：" + g.event);
     if (g.pool) parts.push("池长：" + g.pool + "米（" + (g.pool === 50 ? "长池" : "短池") + "）");
     if (g.recordType) parts.push("记录性质：" + g.recordType);
@@ -90,7 +91,7 @@
   }
   DATA.ageGroups.forEach(function (g, i) {
     var b = document.createElement("button");
-    b.textContent = g.label;
+    b.textContent = g.label + (g.season ? " · " + g.season : "");
     if (i === 0) b.classList.add("active");
     b.addEventListener("click", function () {
       currentYouth = i;
@@ -101,6 +102,26 @@
     youthTabs.appendChild(b);
   });
   renderYouth();
+
+  // 25米短池
+  if (DATA.shortPool) {
+    var sp = DATA.shortPool;
+    el("sp-youth-source").textContent =
+      "赛事：" + (sp.youthEvent || "") + "　|　" + (sp.youthSource || "");
+    el("sp-youth-body").innerHTML = (sp.youthRecords || []).map(function (r) {
+      return "<tr><td>" + escapeHtml(r.group) + "</td><td>" + escapeHtml(r.event) + "</td><td>" +
+        escapeHtml(r.gender) + "</td><td>" + escapeHtml(r.time || "—") + "</td><td>" +
+        escapeHtml(r.holder || "—") + "</td><td>" + escapeHtml(r.note || "") + "</td></tr>";
+    }).join("");
+
+    el("sp-junior-source").textContent =
+      "赛事：" + (sp.juniorEvent || "") + "　|　" + (sp.juniorSource || "");
+    el("sp-junior-body").innerHTML = (sp.juniorRecords || []).map(function (e) {
+      var w = escapeHtml(e.women || "—") + (e.womenHolder && e.womenHolder !== "—" ? "<br><small>" + escapeHtml(e.womenHolder) + "</small>" : "");
+      var m = escapeHtml(e.men || "—") + (e.menHolder && e.menHolder !== "—" ? "<br><small>" + escapeHtml(e.menHolder) + "</small>" : "");
+      return "<tr><td>" + escapeHtml(e.name) + "</td><td>" + w + "</td><td>" + m + "</td></tr>";
+    }).join("");
+  }
 
   // Adult age groups
   var adultTabs = el("adult-group-tabs");
