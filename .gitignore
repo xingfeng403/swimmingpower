@@ -5,3 +5,16 @@
 .DS_Store
 Thumbs.db
 *.log
+
+# 智能体检索/爬取过程的临时产物（只保留站点本体 4 个文件 + README）
+.scratch/
+*.py
+*.sh
+/*.html
+!/index.html
+/*.json
+/*.txt
+raw/
+img/
+pdfs/
+qq/
